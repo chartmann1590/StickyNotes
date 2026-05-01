@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">Sticky Notes</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
+    <string name="app_widget_description">This is an app widget description</string>
+    <string name="note_hint">Write your note…</string>
+    <string name="save_note">Save note</string>
+    <string name="menu_share">Share note</string>
+    <string name="menu_new_note">New note</string>
+    <string name="menu_previous_note">Previous note</string>
+    <string name="menu_next_note">Next note</string>
+    <string name="menu_delete_note">Delete note</string>
+    <string name="menu_clear">Clear note</string>
+    <string name="menu_privacy">Privacy policy</string>
+    <string name="menu_support">Support the developer</string>
+    <string name="menu_about">About</string>
+    <string name="toast_saved">Note saved</string>
+    <string name="toast_cleared">Note cleared</string>
+    <string name="toast_note_created">New note created</string>
+    <string name="toast_note_deleted">Note deleted</string>
+    <string name="toolbar_note_counter">Note %1$d of %2$d</string>
+    <string name="about_title">About Sticky Notes</string>
+    <string name="about_message">Version %1$s\n\nA simple home-screen sticky note and widget.</string>
+    <string name="admob_banner_placeholder">ca-app-pub-8382831211800454/9040438036</string>
+    <string name="widget_select_note">Select a note for this widget</string>
+    <string name="notes_list_title">All notes (tap to switch)</string>
+</resources>

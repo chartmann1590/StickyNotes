@@ -1,0 +1,125 @@
+plugins {
+    id 'com.android.application'
+    id 'com.google.gms.google-services'
+    id 'com.google.firebase.crashlytics'
+    id 'com.google.firebase.firebase-perf'
+}
+
+def localProps = new Properties()
+def localFile = rootProject.file('local.properties')
+if (localFile.exists()) {
+    localFile.withInputStream { localProps.load(it) }
+}
+
+def readProp = { String fileKey, String envKey, String fallback ->
+    def v = System.getenv(envKey)
+    if (v != null && !v.isEmpty()) return v
+    v = localProps.getProperty(fileKey)
+    if (v != null && !v.isEmpty()) return v
+    return fallback
+}
+
+android {
+    namespace 'com.charles.stickynotes'
+    compileSdk 35
+
+    def releaseStoreFile = readProp("RELEASE_STORE_FILE", "RELEASE_STORE_FILE", "")
+    def releaseStorePassword = readProp("RELEASE_STORE_PASSWORD", "RELEASE_STORE_PASSWORD", "")
+    def releaseKeyAlias = readProp("RELEASE_KEY_ALIAS", "RELEASE_KEY_ALIAS", "")
+    def releaseKeyPassword = readProp("RELEASE_KEY_PASSWORD", "RELEASE_KEY_PASSWORD", "")
+
+    defaultConfig {
+        applicationId "com.charles.stickynotes"
+        minSdk 21
+        targetSdk 35
+
+        def vcEnv = System.getenv("VERSION_CODE")
+        versionCode vcEnv ? vcEnv.toInteger() : 2
+        versionName "1.2"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    signingConfigs {
+        release {
+            if (releaseStoreFile) {
+                storeFile file(releaseStoreFile)
+            }
+            storePassword releaseStorePassword ?: null
+            keyAlias releaseKeyAlias ?: null
+            keyPassword releaseKeyPassword ?: null
+        }
+    }
+
+    buildTypes {
+        debug {
+            manifestPlaceholders = [
+                    admobApplicationId: readProp(
+                            "ADMOB_APPLICATION_ID",
+                            "ADMOB_APPLICATION_ID",
+                            "ca-app-pub-3940256099942544~3347511713"
+                    )
+            ]
+            buildConfigField "String", "ADMOB_NATIVE_AD_UNIT_ID", "\"${readProp("ADMOB_NATIVE_AD_UNIT_ID", "ADMOB_NATIVE_AD_UNIT_ID", "ca-app-pub-3940256099942544/2247696110")}\""
+            buildConfigField "String", "ADMOB_BANNER_AD_UNIT_ID", "\"${readProp("ADMOB_BANNER_AD_UNIT_ID", "ADMOB_BANNER_AD_UNIT_ID", "ca-app-pub-3940256099942544/6300978111")}\""
+            buildConfigField "String", "ADMOB_INTERSTITIAL_AD_UNIT_ID", "\"${readProp("ADMOB_INTERSTITIAL_AD_UNIT_ID", "ADMOB_INTERSTITIAL_AD_UNIT_ID", "ca-app-pub-3940256099942544/1033173712")}\""
+            buildConfigField "String", "PRIVACY_POLICY_URL", "\"${readProp("PRIVACY_POLICY_URL", "PRIVACY_POLICY_URL", "https://YOUR_USERNAME.github.io/StickyNotes/privacy-policy.html")}\""
+            buildConfigField "String", "SUPPORT_URL", "\"https://buymeacoffee.com/charleshartmann\""
+        }
+        release {
+            minifyEnabled false
+            manifestPlaceholders = [
+                    admobApplicationId: readProp(
+                            "ADMOB_APPLICATION_ID",
+                            "ADMOB_APPLICATION_ID",
+                            "ca-app-pub-8382831211800454~8911433768"
+                    )
+            ]
+            buildConfigField "String", "ADMOB_NATIVE_AD_UNIT_ID", "\"${readProp("ADMOB_NATIVE_AD_UNIT_ID", "ADMOB_NATIVE_AD_UNIT_ID", "ca-app-pub-8382831211800454/3024860021")}\""
+            buildConfigField "String", "ADMOB_BANNER_AD_UNIT_ID", "\"${readProp("ADMOB_BANNER_AD_UNIT_ID", "ADMOB_BANNER_AD_UNIT_ID", "ca-app-pub-8382831211800454/9040438036")}\""
+            buildConfigField "String", "ADMOB_INTERSTITIAL_AD_UNIT_ID", "\"${readProp("ADMOB_INTERSTITIAL_AD_UNIT_ID", "ADMOB_INTERSTITIAL_AD_UNIT_ID", "ca-app-pub-8382831211800454/4165369859")}\""
+            buildConfigField "String", "PRIVACY_POLICY_URL", "\"${readProp("PRIVACY_POLICY_URL", "PRIVACY_POLICY_URL", "https://YOUR_USERNAME.github.io/StickyNotes/privacy-policy.html")}\""
+            buildConfigField "String", "SUPPORT_URL", "\"https://buymeacoffee.com/charleshartmann\""
+            if (releaseStoreFile && releaseStorePassword && releaseKeyAlias && releaseKeyPassword) {
+                signingConfig signingConfigs.release
+            } else {
+                println("Release signing properties are missing. Falling back to debug signing.")
+                signingConfig signingConfigs.debug
+            }
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    buildFeatures {
+        viewBinding true
+        buildConfig true
+    }
+}
+
+dependencies {
+    implementation 'androidx.appcompat:appcompat:1.7.0'
+    implementation 'com.google.android.material:material:1.12.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.2.0'
+    implementation 'androidx.coordinatorlayout:coordinatorlayout:1.2.0'
+    implementation 'androidx.core:core:1.15.0'
+    implementation 'androidx.activity:activity:1.9.3'
+    implementation 'androidx.browser:browser:1.8.0'
+
+    implementation platform('com.google.firebase:firebase-bom:33.7.0')
+    implementation 'com.google.firebase:firebase-analytics'
+    implementation 'com.google.firebase:firebase-crashlytics'
+    implementation 'com.google.firebase:firebase-perf'
+
+    implementation 'com.google.android.gms:play-services-ads:23.6.0'
+    implementation 'com.google.android.ump:user-messaging-platform:3.1.0'
+
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.2.1'
+    androidTestImplementation 'androidx.test:rules:1.6.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.6.1'
+}

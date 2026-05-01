@@ -1,0 +1,16 @@
+# Copy to local.properties (gitignored) and fill in values for local release builds.
+
+# Release signing (paths on your machine)
+RELEASE_STORE_FILE=C\:\\path\\to\\your-upload-keystore.jks
+RELEASE_STORE_PASSWORD=
+RELEASE_KEY_ALIAS=
+RELEASE_KEY_PASSWORD=
+
+# AdMob (mirror these in GitHub Actions secrets for CI releases)
+ADMOB_APPLICATION_ID=ca-app-pub-8382831211800454~8911433768
+ADMOB_NATIVE_AD_UNIT_ID=ca-app-pub-8382831211800454/3024860021
+ADMOB_BANNER_AD_UNIT_ID=ca-app-pub-8382831211800454/9040438036
+ADMOB_INTERSTITIAL_AD_UNIT_ID=ca-app-pub-8382831211800454/4165369859
+
+# Public URL of this privacy policy (GitHub Pages after you enable it)
+PRIVACY_POLICY_URL=https://YOUR_USERNAME.github.io/StickyNotes/privacy-policy.html

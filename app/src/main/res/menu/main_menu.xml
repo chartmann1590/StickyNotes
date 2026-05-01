@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_share"
+        android:icon="@android:drawable/ic_menu_share"
+        android:title="@string/menu_share"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_new_note"
+        android:icon="@android:drawable/ic_input_add"
+        android:title="@string/menu_new_note"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_previous_note"
+        android:icon="@android:drawable/ic_media_previous"
+        android:title="@string/menu_previous_note"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_next_note"
+        android:icon="@android:drawable/ic_media_next"
+        android:title="@string/menu_next_note"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_delete_note"
+        android:icon="@android:drawable/ic_menu_delete"
+        android:title="@string/menu_delete_note"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_clear"
+        android:title="@string/menu_clear"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_privacy"
+        android:title="@string/menu_privacy"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_support"
+        android:title="@string/menu_support"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_about"
+        android:title="@string/menu_about"
+        app:showAsAction="never" />
+</menu>
