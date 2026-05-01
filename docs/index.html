@@ -1,33 +1,188 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Sticky Notes — Android app</title>
+  <title>Sticky Notes for Android | Multiple Notes + Linked Widgets</title>
+  <meta name="description" content="Sticky Notes is a modern Android app with multiple sticky notes, fast writing, and home-screen widgets that can link to specific notes." />
+  <meta name="keywords" content="Sticky Notes Android, Android note app, sticky note widget, multiple notes, home screen widget" />
+  <meta name="author" content="Charles Hartmann" />
+  <meta name="robots" content="index,follow" />
+  <link rel="canonical" href="https://chartmann1590.github.io/StickyNotes/" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Sticky Notes for Android" />
+  <meta property="og:description" content="Multiple notes, linked widgets, and a clean fast writing experience." />
+  <meta property="og:url" content="https://chartmann1590.github.io/StickyNotes/" />
+  <meta property="og:image" content="https://chartmann1590.github.io/StickyNotes/assets/screenshots/main-fresh.png" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Sticky Notes for Android" />
+  <meta name="twitter:description" content="Multiple notes, linked widgets, and a clean fast writing experience." />
+  <meta name="twitter:image" content="https://chartmann1590.github.io/StickyNotes/assets/screenshots/main-fresh.png" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Sticky Notes",
+    "operatingSystem": "Android",
+    "applicationCategory": "ProductivityApplication",
+    "description": "A modern Android sticky notes app with multiple notes and note-linked home screen widgets.",
+    "url": "https://chartmann1590.github.io/StickyNotes/",
+    "author": {
+      "@type": "Person",
+      "name": "Charles Hartmann"
+    }
+  }
+  </script>
+
   <style>
-    :root { color-scheme: light dark; }
-    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; margin: 0 auto; max-width: 720px; padding: 2rem; line-height: 1.55; }
-    h1 { font-size: 1.75rem; margin-top: 0; }
-    a { color: inherit; }
-    .cta { display: inline-block; margin: 0.5rem 0.75rem 0.5rem 0; padding: 0.65rem 1rem; border-radius: 999px; background: #0f9d58; color: #fff; text-decoration: none; font-weight: 600; }
-    .muted { opacity: 0.8; font-size: 0.95rem; }
-    ul { padding-left: 1.25rem; }
+    :root {
+      --bg: #060b15;
+      --card: #101827;
+      --line: #243244;
+      --text: #f8fafc;
+      --muted: #94a3b8;
+      --accent: #84cc16;
+      --accent2: #22c55e;
+      --radius: 18px;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, Segoe UI, Roboto, system-ui, -apple-system, sans-serif;
+      background: radial-gradient(circle at 12% 10%, #1e293b 0%, var(--bg) 45%);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    .wrap { max-width: 1120px; margin: 0 auto; padding: 28px 18px 62px; }
+    header { text-align: center; padding: 28px 0 14px; }
+    h1 { margin: 0 0 8px; line-height: 1.1; font-size: clamp(2rem, 4.2vw, 3rem); }
+    .sub { margin: 0 auto 18px; max-width: 760px; color: var(--muted); }
+    .actions { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin-top: 12px; }
+    .btn {
+      text-decoration: none;
+      border-radius: 999px;
+      padding: 11px 16px;
+      font-weight: 700;
+      transition: transform .15s ease;
+    }
+    .btn:hover { transform: translateY(-1px); }
+    .btn.primary {
+      color: #0b1220;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+    }
+    .btn.ghost {
+      color: var(--text);
+      background: #1f2937;
+      border: 1px solid #334155;
+    }
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+      margin: 24px 0 18px;
+    }
+    .feature {
+      background: rgba(16, 24, 39, 0.92);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 16px;
+    }
+    .feature h3 { margin: 0 0 8px; font-size: 1.02rem; }
+    .feature p { margin: 0; color: var(--muted); font-size: .94rem; }
+    .shots {
+      margin-top: 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 12px;
+    }
+    figure {
+      margin: 0;
+      background: rgba(16, 24, 39, 0.92);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    img {
+      width: 100%;
+      display: block;
+      aspect-ratio: 9/16;
+      object-fit: cover;
+      background: #0b1220;
+    }
+    figcaption { padding: 10px 12px; color: var(--muted); font-size: .92rem; }
+    footer {
+      margin-top: 32px;
+      border-top: 1px solid #233247;
+      padding-top: 14px;
+      color: var(--muted);
+      text-align: center;
+      font-size: .92rem;
+    }
+    footer a { color: #d1d5db; }
   </style>
 </head>
 <body>
-  <h1>Sticky Notes</h1>
-  <p class="muted">A simple Android sticky note with a home screen widget, modern Material design, and optional ads.</p>
-  <p>
-    <a class="cta" href="https://buymeacoffee.com/charleshartmann">Support on Buy Me a Coffee</a>
-    <a class="cta" href="privacy-policy.html">Privacy policy</a>
-  </p>
-  <h2>Features</h2>
-  <ul>
-    <li>Fast note editor with autosave to device storage</li>
-    <li>Home screen widget that mirrors your note</li>
-    <li>Share and clear from the toolbar menu</li>
-    <li>Native and banner ads (release builds use your AdMob units)</li>
-  </ul>
-  <p class="muted">Enable GitHub Pages on this repository (branch <code>main</code> / folder <code>/docs</code>) so this site is served at <code>https://&lt;user&gt;.github.io/&lt;repo&gt;/</code>.</p>
+  <div class="wrap">
+    <header>
+      <h1>Sticky Notes for Android</h1>
+      <p class="sub">Capture ideas fast, manage multiple notes, and place linked sticky-note widgets right on your home screen.</p>
+      <div class="actions">
+        <a class="btn primary" href="https://github.com/chartmann1590/StickyNotes/releases">Download Latest Build</a>
+        <a class="btn ghost" href="https://github.com/chartmann1590/StickyNotes">GitHub</a>
+        <a class="btn ghost" href="privacy-policy.html">Privacy Policy</a>
+        <a class="btn ghost" href="https://buymeacoffee.com/charleshartmann">Sponsor</a>
+      </div>
+    </header>
+
+    <section class="features" aria-label="Feature Highlights">
+      <article class="feature">
+        <h3>Multiple Notes</h3>
+        <p>Create and switch between notes quickly without leaving the main screen.</p>
+      </article>
+      <article class="feature">
+        <h3>Linked Widgets</h3>
+        <p>Assign each widget to a specific note so every widget has a clear purpose.</p>
+      </article>
+      <article class="feature">
+        <h3>Fast Writing Flow</h3>
+        <p>Minimal UI, quick save action, and practical note controls.</p>
+      </article>
+      <article class="feature">
+        <h3>Open Project</h3>
+        <p>Source, releases, and policy are all public and easy to access.</p>
+      </article>
+    </section>
+
+    <section class="shots" aria-label="Real App Screenshots">
+      <figure>
+        <img src="assets/screenshots/main-fresh.png" alt="Sticky Notes main screen on Android" />
+        <figcaption>Main writing screen with quick note switching.</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/screenshots/menu-fresh.png" alt="Sticky Notes action menu" />
+        <figcaption>Action menu for switching, deleting, and privacy/support links.</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/screenshots/widget-config.png" alt="Widget configuration note selector" />
+        <figcaption>Choose exactly which note each widget should display.</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/screenshots/home-screen.png" alt="Sticky Notes widget on Android home screen" />
+        <figcaption>Sticky note widget pinned directly to the home screen.</figcaption>
+      </figure>
+    </section>
+
+    <footer>
+      <div>Sticky Notes by Charles Hartmann</div>
+      <div>
+        <a href="https://github.com/chartmann1590/StickyNotes">GitHub</a> ·
+        <a href="privacy-policy.html">Privacy</a> ·
+        <a href="https://buymeacoffee.com/charleshartmann">Sponsor</a>
+      </div>
+    </footer>
+  </div>
 </body>
 </html>
