@@ -21,7 +21,7 @@ def readProp = { String fileKey, String envKey, String fallback ->
 
 android {
     namespace 'com.charles.stickynotes'
-    compileSdk 35
+    compileSdk 36
 
     def releaseStoreFile = readProp("RELEASE_STORE_FILE", "RELEASE_STORE_FILE", "")
     def releaseStorePassword = readProp("RELEASE_STORE_PASSWORD", "RELEASE_STORE_PASSWORD", "")
@@ -31,7 +31,7 @@ android {
     defaultConfig {
         applicationId "com.charles.stickynotes"
         minSdk 21
-        targetSdk 35
+        targetSdk 36
 
         def vcEnv = System.getenv("VERSION_CODE")
         versionCode vcEnv ? vcEnv.toInteger() : 2
