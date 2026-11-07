@@ -38,6 +38,8 @@ android {
         versionName "1.2"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        // Store this build is for: "play" (default) or "amazon" (./gradlew ... -Pstore=amazon).
+        buildConfigField "String", "STORE", "\"${project.findProperty('store') ?: 'play'}\""
     }
 
     signingConfigs {
