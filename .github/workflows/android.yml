@@ -2,6 +2,7 @@ name: Android CI and Release
 
 on:
   push:
+    branches-ignore: [direct-stripe]
   pull_request:
 
 permissions:
