@@ -86,6 +86,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_menu, menu);
+        // Amazon Appstore build: no outside-payment (donation) link (Amazon monetization policy)
+        if ("amazon".equals(BuildConfig.STORE)) {
+            MenuItem support = menu.findItem(R.id.action_support);
+            if (support != null) support.setVisible(false);
+        }
         return true;
     }
 
